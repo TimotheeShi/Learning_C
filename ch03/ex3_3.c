@@ -3,11 +3,11 @@
 int binsearch(int x, int v[], int n);
 
 int main() {
-    int n = 11;
+    int n = 3;
     int v[n];
     for (int i = 0; i < n; ++i)
-        v[i] = i;
-    int pos = binsearch(2, v, n);
+        v[i] = i + 1;
+    int pos = binsearch(6, v, n);
     printf("%d\n", pos);
     return 0;
 }
@@ -17,15 +17,16 @@ int binsearch(int x, int v[], int n) {
 
     low = 0;
     high = n - 1;
-    while (low < high) {
-        mid = (low + high) / 2;
+    mid = (low + high) / 2;
+    while (low < high && x != v[mid]) {
         if(v[mid] > x)
             high = mid - 1;
         else
-            low = mid;
+            low = mid + 1;
+        mid = (low + high) / 2;
     }
-    if (low == high)
-        return low;
+    if (x == v[mid])
+        return mid;
     else
         return -1;
 }
